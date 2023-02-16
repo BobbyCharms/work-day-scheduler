@@ -13,17 +13,15 @@ $('.time-block').each(function() {
 
   if(currentTime > currentHour) {
     $(this).addClass("past");
-    $(this).removeClass("future");
-    $(this).removeClass("present");
+    $(this).removeClass("future present");
 } else if (currentTime === currentHour) {
     $(this).addClass("present");
-    $(this).removeClass("past");
+    $(this).removeClass("past future");
     $(this).removeClass("future");
 } else {
     $(this).addClass("future");
-    $(this).removeClass("past");
-    $(this).removeClass("present");
-}
+    $(this).removeClass("past present");
+  }
 });
 
 $('.saveBtn').on("click", function() {
