@@ -1,17 +1,48 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-let currentHour
-let blockHour
+let currentTime = dayjs().hour();
+let currentDay = document.querySelector('#currentDay');
+
+$("#currentDay").text(dayjs());
+console.log(currentDay)
+
 $('.time-block').each(function() {
-  if(blockHour > currentHour)) {
+  let currentHour = parseInt(this.id.split("-")[1]);
+  console.log(currentHour)
 
-  } else if () {
+  if(currentTime > currentHour) {
+    $(this).addClass("past");
+    $(this).removeClass("future");
+    $(this).removeClass("present");
+} else if (currentTime === currentHour) {
+    $(this).addClass("present");
+    $(this).removeClass("past");
+    $(this).removeClass("future");
+} else {
+    $(this).addClass("future");
+    $(this).removeClass("past");
+    $(this).removeClass("present");
+}
+});
 
-  } else {
+$('.saveBtn').on("click", function() {
+  let notes = $(this).siblings(".description").val();
+  let hourNote = $(this).parent().attr("id");
+  localStorage.setItem(hourNote, notes);
+})
 
-  }
-  // 1. define the current hour, properly displaying hours through the day
+$("#hour-09 .description").val(localStorage.getItem("hour-09"));
+$("#hour-10 .description").val(localStorage.getItem("hour-10"));
+$("#hour-11 .description").val(localStorage.getItem("hou-11"));
+$("#hour-12 .description").val(localStorage.getItem("hour-12"));
+$("#hour-13 .description").val(localStorage.getItem("hour-13"));
+$("#hour-14 .description").val(localStorage.getItem("hour-14"));
+$("#hour-15 .description").val(localStorage.getItem("hour-15"));
+$("#hour-16 .description").val(localStorage.getItem("hour-16"));
+$("#hour-17 .description").val(localStorage.getItem("hour-17"));
+$("#hour-18 .description").val(localStorage.getItem("hour-18"));
+// 1. define the current hour, properly displaying hours through the day
   // 2. allow the user to save notes within individual timeblocks, have the data save to local storage, and utilize local storage each time the page loads to have persistent data
   // 3. display the current date in the header
 
@@ -35,4 +66,4 @@ $('.time-block').each(function() {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-});
+
